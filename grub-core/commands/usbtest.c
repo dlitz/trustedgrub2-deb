@@ -102,7 +102,7 @@ grub_usb_get_string (grub_usb_device_t dev, grub_uint8_t index, int langid,
     }
 
   *grub_utf16_to_utf8 ((grub_uint8_t *) *string, descstrp->str,
-		       descstrp->length / 2 - 1) = 0;
+                      descstrp->length / 2 - 1) = 0;
   grub_free (descstrp);
 
   return GRUB_USB_ERR_NONE;

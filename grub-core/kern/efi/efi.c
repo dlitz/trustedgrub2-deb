@@ -201,7 +201,7 @@ grub_efi_set_variable(const char *var, const grub_efi_guid_t *guid,
 
   r = grub_efi_system_table->runtime_services;
 
-  status = efi_call_5 (r->set_variable, var16, guid, 
+  status = efi_call_5 (r->set_variable, var16, guid,
 		       (GRUB_EFI_VARIABLE_NON_VOLATILE
 			| GRUB_EFI_VARIABLE_BOOTSERVICE_ACCESS
 			| GRUB_EFI_VARIABLE_RUNTIME_ACCESS),
@@ -357,21 +357,21 @@ grub_efi_get_filename (grub_efi_device_path_t *dp0)
 	break;
       else if (type == GRUB_EFI_MEDIA_DEVICE_PATH_TYPE
 	       && subtype == GRUB_EFI_FILE_PATH_DEVICE_PATH_SUBTYPE)
-	{
-	  grub_efi_file_path_device_path_t *fp;
-	  grub_efi_uint16_t len;
+       {
+         grub_efi_file_path_device_path_t *fp;
+         grub_efi_uint16_t len;
 
-	  *p++ = '/';
+         *p++ = '/';
 
 	  len = ((GRUB_EFI_DEVICE_PATH_LENGTH (dp) - 4)
 		 / sizeof (grub_efi_char16_t));
 	  fp = (grub_efi_file_path_device_path_t *) dp;
 	  /* According to EFI spec Path Name is NULL terminated */
-	  while (len > 0 && fp->path_name[len - 1] == 0)
-	    len--;
+         while (len > 0 && fp->path_name[len - 1] == 0)
+           len--;
 
-	  p = (char *) grub_utf16_to_utf8 ((unsigned char *) p, fp->path_name, len);
-	}
+         p = (char *) grub_utf16_to_utf8 ((unsigned char *) p, fp->path_name, len);
+       }
 
       dp = GRUB_EFI_NEXT_DEVICE_PATH (dp);
     }
@@ -797,15 +797,15 @@ grub_efi_print_device_path (grub_efi_device_path_t *dp)
 	      {
 		grub_efi_file_path_device_path_t *fp;
 		grub_uint8_t *buf;
-		fp = (grub_efi_file_path_device_path_t *) dp;
-		buf = grub_malloc ((len - 4) * 2 + 1);
-		if (buf)
-		  *grub_utf16_to_utf8 (buf, fp->path_name,
-				       (len - 4) / sizeof (grub_efi_char16_t))
-		    = '\0';
-		else
-		  grub_errno = GRUB_ERR_NONE;
-		grub_printf ("/File(%s)", buf);
+               fp = (grub_efi_file_path_device_path_t *) dp;
+               buf = grub_malloc ((len - 4) * 2 + 1);
+               if (buf)
+                 *grub_utf16_to_utf8 (buf, fp->path_name,
+                                      (len - 4) / sizeof (grub_efi_char16_t))
+                   = '\0';
+               else
+                 grub_errno = GRUB_ERR_NONE;
+               grub_printf ("/File(%s)", buf);
 		grub_free (buf);
 	      }
 	      break;

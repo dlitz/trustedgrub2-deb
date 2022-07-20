@@ -108,7 +108,7 @@ grub_chainloader_boot (void)
 
 static void
 copy_file_path (grub_efi_file_path_device_path_t *fp,
-		const char *str, grub_efi_uint16_t len)
+               const char *str, grub_efi_uint16_t len)
 {
   grub_efi_char16_t *p;
   grub_efi_uint16_t size;
@@ -117,7 +117,7 @@ copy_file_path (grub_efi_file_path_device_path_t *fp,
   fp->header.subtype = GRUB_EFI_FILE_PATH_DEVICE_PATH_SUBTYPE;
 
   size = grub_utf8_to_utf16 (fp->path_name, len * GRUB_MAX_UTF16_PER_UTF8,
-			     (const grub_uint8_t *) str, len, 0);
+                            (const grub_uint8_t *) str, len, 0);
   for (p = fp->path_name; p < fp->path_name + size; p++)
     if (*p == '/')
       *p = '\\';

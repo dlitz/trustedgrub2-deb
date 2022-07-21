@@ -19,7 +19,7 @@
 
 /* HFS+ is documented at http://developer.apple.com/technotes/tn/tn1150.html */
 
-#define grub_fshelp_node grub_hfsplus_file 
+#define grub_fshelp_node grub_hfsplus_file
 #include <grub/err.h>
 #include <grub/file.h>
 #include <grub/mm.h>
@@ -145,7 +145,7 @@ grub_hfsplus_read_block (grub_fshelp_node_t node, grub_disk_addr_t fileblock)
 {
   struct grub_hfsplus_btnode *nnode = 0;
   grub_disk_addr_t blksleft = fileblock;
-  struct grub_hfsplus_extent *extents = node->compressed 
+  struct grub_hfsplus_extent *extents = node->compressed
     ? &node->resource_extents[0] : &node->extents[0];
 
   while (1)
@@ -461,7 +461,7 @@ grub_hfsplus_cmp_extkey (struct grub_hfsplus_key *keya,
 
   if (extkey_a->type < extkey_b->type)
     return -1;
-  
+
   akey = grub_be_to_cpu32 (extkey_a->start);
   if (akey > extkey_b->start)
     return 1;
@@ -548,7 +548,7 @@ grub_hfsplus_btree_search (struct grub_hfsplus_btree *btree,
 			   struct grub_hfsplus_key_internal *key,
 			   int (*compare_keys) (struct grub_hfsplus_key *keya,
 						struct grub_hfsplus_key_internal *keyb),
-			   struct grub_hfsplus_btnode **matchnode, 
+			   struct grub_hfsplus_btnode **matchnode,
 			   grub_off_t *keyoffset)
 {
   grub_uint64_t currnode;
@@ -661,6 +661,7 @@ list_nodes (void *record, void *hook_arg)
   char *filename;
   int i;
   struct grub_fshelp_node *node;
+  grub_uint16_t *keyname;
   struct grub_hfsplus_catfile *fileinfo;
   enum grub_fshelp_filetype type = GRUB_FSHELP_UNKNOWN;
   struct list_nodes_ctx *ctx = hook_arg;
@@ -719,32 +720,34 @@ list_nodes (void *record, void *hook_arg)
   if (! filename)
     return 0;
 
+  keyname = grub_malloc (grub_be_to_cpu16 (catkey->namelen) * sizeof (*keyname));
+  if (!keyname)
+    {
+      grub_free (filename);
+      return 0;
+    }
+
   /* Make sure the byte order of the UTF16 string is correct.  */
   for (i = 0; i < grub_be_to_cpu16 (catkey->namelen); i++)
     {
-      catkey->name[i] = grub_be_to_cpu16 (catkey->name[i]);
+      keyname[i] = grub_be_to_cpu16 (catkey->name[i]);
 
-      if (catkey->name[i] == '/')
-	catkey->name[i] = ':';
+      if (keyname[i] == '/')
+       keyname[i] = ':';
 
       /* If the name is obviously invalid, skip this node.  */
-      if (catkey->name[i] == 0)
-	{
-	  grub_free (filename);
-	  return 0;
-	}
+      if (keyname[i] == 0)
+       {
+         grub_free (keyname);
+         grub_free (filename);
+         return 0;
+       }
     }
 
-  *grub_utf16_to_utf8 ((grub_uint8_t *) filename, catkey->name,
-		       grub_be_to_cpu16 (catkey->namelen)) = '\0';
+  *grub_utf16_to_utf8 ((grub_uint8_t *) filename, keyname,
+                      grub_be_to_cpu16 (catkey->namelen)) = '\0';
 
-  /* Restore the byte order to what it was previously.  */
-  for (i = 0; i < grub_be_to_cpu16 (catkey->namelen); i++)
-    {
-      if (catkey->name[i] == ':')
-	catkey->name[i] = '/';
-      catkey->name[i] = grub_be_to_cpu16 (catkey->name[i]);
-    }
+  grub_free (keyname);
 
   /* hfs+ is case insensitive.  */
   if (! ctx->dir->data->case_sensitive)
@@ -975,6 +978,7 @@ grub_hfsplus_label (grub_device_t device, char **label)
   grub_disk_t disk = device->disk;
   struct grub_hfsplus_catkey *catkey;
   int i, label_len;
+  grub_uint16_t *label_name;
   struct grub_hfsplus_key_internal intern;
   struct grub_hfsplus_btnode *node = NULL;
   grub_disk_addr_t ptr = 0;
@@ -1003,22 +1007,41 @@ grub_hfsplus_label (grub_device_t device, char **label)
     grub_hfsplus_btree_recptr (&data->catalog_tree, node, ptr);
 
   label_len = grub_be_to_cpu16 (catkey->namelen);
+  label_name = grub_malloc (label_len * sizeof (*label_name));
+  if (!label_name)
+    {
+      grub_free (node);
+      grub_free (data);
+      return grub_errno;
+    }
+
   for (i = 0; i < label_len; i++)
     {
-      catkey->name[i] = grub_be_to_cpu16 (catkey->name[i]);
+      label_name[i] = grub_be_to_cpu16 (catkey->name[i]);
 
       /* If the name is obviously invalid, skip this node.  */
-      if (catkey->name[i] == 0)
-	return 0;
+      if (label_name[i] == 0)
+       {
+         grub_free (label_name);
+         grub_free (node);
+         grub_free (data);
+         return 0;
+       }
     }
 
   *label = grub_malloc (label_len * GRUB_MAX_UTF8_PER_UTF16 + 1);
   if (! *label)
-    return grub_errno;
+    {
+      grub_free (label_name);
+      grub_free (node);
+      grub_free (data);
+      return grub_errno;
+    }
 
-  *grub_utf16_to_utf8 ((grub_uint8_t *) (*label), catkey->name,
-		       label_len) = '\0';
+  *grub_utf16_to_utf8 ((grub_uint8_t *) (*label), label_name,
+                      label_len) = '\0';
 
+  grub_free (label_name);
   grub_free (node);
   grub_free (data);
 

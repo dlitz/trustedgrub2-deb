@@ -69,6 +69,7 @@ grub_usb_get_string (grub_usb_device_t dev, grub_uint8_t index, int langid,
 {
   struct grub_usb_desc_str descstr;
   struct grub_usb_desc_str *descstrp;
+  grub_uint16_t *strbuf;
   grub_usb_err_t err;
 
   /* Only get the length.  */
@@ -101,8 +102,18 @@ grub_usb_get_string (grub_usb_device_t dev, grub_uint8_t index, int langid,
       return GRUB_USB_ERR_INTERNAL;
     }
 
-  *grub_utf16_to_utf8 ((grub_uint8_t *) *string, descstrp->str,
-		       descstrp->length / 2 - 1) = 0;
+  strbuf = grub_malloc (descstrp->length - sizeof (*descstrp));
+  if (!strbuf)
+    {
+      grub_free (*string);
+      grub_free (descstrp);
+      return GRUB_USB_ERR_INTERNAL;
+    }
+
+  grub_memcpy (strbuf, descstrp->str, descstrp->length - sizeof (*descstrp));
+  *grub_utf16_to_utf8 ((grub_uint8_t *) *string, strbuf,
+                      descstrp->length / 2 - 1) = 0;
+  grub_free (strbuf);
   grub_free (descstrp);
 
   return GRUB_USB_ERR_NONE;

@@ -16,7 +16,7 @@
 
 
 %:
-	dh $@
+	dh $@ --builddirectory=debian/build
 
 
 override_dh_autoreconf:

@@ -1,0 +1,3 @@
+debian/dejavu-font-path.patch
+upstream/build-Capitalise-freetype_-variables.patch
+upstream/build-Use-pkg-config-to-find-FreeType.patch

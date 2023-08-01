@@ -1,0 +1,9 @@
+/*.debhelper
+/*.substvars
+/.debhelper/
+/autoreconf.after
+/autoreconf.before
+/build/
+/debhelper-build-stamp
+/files
+/trustedgrub2/

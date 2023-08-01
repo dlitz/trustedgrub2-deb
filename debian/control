@@ -1,5 +1,5 @@
 Source: trustedgrub2
-Section: unknown
+Section: admin
 Priority: optional
 Maintainer: Darsey Litzenberger <dlitz@dlitz.net>
 Rules-Requires-Root: no
@@ -37,7 +37,7 @@ Build-Depends:
  libefivar-dev [i386 amd64 ia64 x32 armel armhf arm64],
 Build-Conflicts: autoconf2.13, libzfs-dev, libnvpair-dev
 Standards-Version: 4.6.2
-Homepage: <insert the upstream URL, if relevant>
+Homepage: https://github.com/braincorp/TrustedGRUB2
 #Vcs-Browser: https://salsa.debian.org/debian/trustedgrub2
 #Vcs-Git: https://salsa.debian.org/debian/trustedgrub2.git
 
@@ -46,5 +46,48 @@ Architecture: any
 Depends:
  ${shlibs:Depends},
  ${misc:Depends},
-Description: <insert up to 60 chars description>
- <Insert long description, indented with spaces.>
+Description: TPM enabled GRUB2 Bootloader for legacy BIOS
+ GRUB is a portable, powerful bootloader.  This version of GRUB includes
+ extensions made to transform a standard GRUB2 into a version that offers TCG
+ (TPM) support for granting the integrity of the boot process (trusted boot).
+ .
+ TrustedGRUB2 aims to measure all critical components during the boot process,
+ i.e. GRUB2 kernel, GRUB2 modules, the OS kernel or OS modules and so on,
+ together with their parameters.
+ .
+ Features:
+   * Based on GRUB 2.02
+   * TPM Support with TPM detection (only legacy/mbr mode, UEFI is not
+     supported at the moment)
+   * Measurement of GRUB2 kernel
+   * Measurement of all loaded GRUB2 modules
+   * Measurement of all commands and their parameters entered in shell and
+     scripts
+   * New SHA1-implementation in GRUB2 kernel (necessary for doing the GRUB2
+     modules measurement as the crypto module isn't loaded at this stage)
+   * Added LUKS keyfile support with additional parameter `-k KEYFILE` for
+     `cryptomount` command
+   * Added support for unsealing LUKS keyfile with additional `-s` parameter
+     for `cryptomount` command. LUKS-header is measured before unsealing into
+     PCR 12. Currently unsealing only supported with SRK and well known secret
+     (20 zero bytes)
+   * New commands:
+     * `readpcr PCRNUM`
+     * `tcglog LOGINDEX`
+     * `measure FILE PCRNUM`
+     * `setmor DISABLEAUTODETECT`
+   * Loader measurements:
+     * `linux` / `linux16`
+     * `initrd` / `initrd16`
+     * `chainloader`
+     * `ntdlr`
+     * `multiboot`
+     * `module`
+   * New cryptomount parameters:
+     * `cryptomount -k KEYFILE`
+     * `cryptomount -k KEYFILE -s`
+   * Functionality added without own command:
+     * TPM_Unseal
+     * TPM_GetRandom
+     * TPM_OIAP
+     * TPM_OSAP

@@ -38,8 +38,8 @@ Build-Depends:
 Build-Conflicts: autoconf2.13, libzfs-dev, libnvpair-dev
 Standards-Version: 4.6.2
 Homepage: https://github.com/braincorp/TrustedGRUB2
-#Vcs-Browser: https://salsa.debian.org/debian/trustedgrub2
-#Vcs-Git: https://salsa.debian.org/debian/trustedgrub2.git
+Vcs-Browser: https://github.com/dlitz/trustedgrub2-deb
+Vcs-Git: https://github.com/dlitz/trustedgrub2-deb.git
 
 Package: trustedgrub2
 Architecture: any

@@ -1,5 +1,5 @@
-trustedgrub2 (1.4.0+20230424.git7586a3f7f-0~~dlitz0) UNRELEASED; urgency=medium
+trustedgrub2 (1.4.0+20230424.git7586a3f7f-1) dlitz-aptly; urgency=medium
 
-  * Initial release.
+  * Initial package release.
 
- -- Darsey Litzenberger <dlitz@dlitz.net>  Sat, 29 Jul 2023 15:39:17 -0600
+ -- Darsey Litzenberger <dlitz@dlitz.net>  Wed, 02 Aug 2023 00:25:20 -0600

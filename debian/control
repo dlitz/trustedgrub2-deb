@@ -42,7 +42,7 @@ Vcs-Browser: https://github.com/dlitz/trustedgrub2-deb
 Vcs-Git: https://github.com/dlitz/trustedgrub2-deb.git
 
 Package: trustedgrub2
-Architecture: any
+Architecture: any-i386 any-amd64
 Depends:
  grub-common (>= 2.02),
  ${shlibs:Depends},

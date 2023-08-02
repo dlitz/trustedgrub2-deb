@@ -56,6 +56,9 @@ Description: TPM enabled GRUB2 Bootloader for legacy BIOS
  i.e. GRUB2 kernel, GRUB2 modules, the OS kernel or OS modules and so on,
  together with their parameters.
  .
+ WARNING: TrustedGRUB2 has been abandoned upstream.  This package may have
+ vulnerabilities.  TrenchBoot will probably be better---once it lands.
+ .
  Features:
    * Based on GRUB 2.02
    * TPM Support with TPM detection (only legacy/mbr mode, UEFI is not

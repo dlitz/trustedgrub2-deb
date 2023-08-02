@@ -15,7 +15,7 @@ Build-Depends:
  gcc-12,
  gcc-12-multilib [i386 kopensolaris-i386 any-amd64 any-ppc64 any-sparc],
  xfonts-unifont,
- libfreetype6-dev,
+ libfreetype-dev,
  gettext,
  libdevmapper-dev [linux-any],
  libgeom-dev (>= 8.2+ds1-1~) [kfreebsd-any] | libgeom-dev (<< 8.2) [kfreebsd-any],

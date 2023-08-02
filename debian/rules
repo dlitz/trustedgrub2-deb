@@ -15,5 +15,14 @@ override_dh_auto_configure:
 		--disable-werror \
 		--prefix=/opt/trustedgrub2
 
+override_dh_auto_install:
+	dh_auto_install
+
+	# Don't install files in /etc
+	rm -rf debian/trustedgrub2/etc/bash_completion.d
+	rm -rf debian/trustedgrub2/etc/grub.d
+	-rmdir debian/trustedgrub2/etc
+	! test -d debian/trustedgrub2/etc
+
 # Skip "make check" because it hangs for some reason
 override_dh_auto_test:

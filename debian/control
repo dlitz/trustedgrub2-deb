@@ -44,6 +44,7 @@ Homepage: https://github.com/braincorp/TrustedGRUB2
 Package: trustedgrub2
 Architecture: any
 Depends:
+ grub-common (>= 2.02),
  ${shlibs:Depends},
  ${misc:Depends},
 Description: TPM enabled GRUB2 Bootloader for legacy BIOS

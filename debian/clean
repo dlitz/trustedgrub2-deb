@@ -1,0 +1,7 @@
+docs/*.info
+docs/stamp-1
+docs/stamp-vti
+docs/version-dev.texi
+docs/version.texi
+po/grub.pot
+po/stamp-po

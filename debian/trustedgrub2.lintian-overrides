@@ -1,0 +1,6 @@
+dir-or-file-in-opt
+statically-linked-binary [*.image]
+statically-linked-binary [opt/trustedgrub2/lib/x86_64-linux-gnu/grub/i386-pc/kernel.exec]
+statically-linked-binary [opt/trustedgrub2/lib/x86_64-linux-gnu/grub/i386-pc/kernel.img]
+unstripped-binary-or-object [*.mod]
+unstripped-binary-or-object [*.module]

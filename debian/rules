@@ -24,5 +24,9 @@ override_dh_auto_install:
 	-rmdir debian/trustedgrub2/etc
 	! test -d debian/trustedgrub2/etc
 
+	# Make this file executable to satisfy lintian
+	find debian/trustedgrub2 -path '*/lib/*/grub/i386-pc/modinfo.sh' \
+		-exec chmod -v +x {} +
+
 # Skip "make check" because it hangs for some reason
 override_dh_auto_test:

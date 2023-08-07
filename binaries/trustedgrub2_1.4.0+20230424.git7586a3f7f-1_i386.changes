@@ -1,0 +1,39 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Format: 1.8
+Date: Wed, 02 Aug 2023 00:25:20 -0600
+Source: trustedgrub2
+Binary: trustedgrub2 trustedgrub2-dbgsym
+Architecture: i386
+Version: 1.4.0+20230424.git7586a3f7f-1
+Distribution: dlitz-aptly
+Urgency: medium
+Maintainer: Darsey Litzenberger <dlitz@dlitz.net>
+Changed-By: Darsey Litzenberger <dlitz@dlitz.net>
+Description:
+ trustedgrub2 - TPM enabled GRUB2 Bootloader for legacy BIOS
+Changes:
+ trustedgrub2 (1.4.0+20230424.git7586a3f7f-1) dlitz-aptly; urgency=medium
+ .
+   * Initial package release.
+Checksums-Sha1:
+ 01f6c74920a9d8e1f59c237129d02df55a1125e1 12660104 trustedgrub2-dbgsym_1.4.0+20230424.git7586a3f7f-1_i386.deb
+ c32bbe17c66d5a17e47554e1eb2a14fe82c9aa4d 12494 trustedgrub2_1.4.0+20230424.git7586a3f7f-1_i386.buildinfo
+ cfd07362e40f2a2f9d1f8b7d58d3ec64f2fb0b44 8235160 trustedgrub2_1.4.0+20230424.git7586a3f7f-1_i386.deb
+Checksums-Sha256:
+ c8448f1934d48e57ed3a1c9544d840247fbf15985386d88cc69b2e9f326e57d2 12660104 trustedgrub2-dbgsym_1.4.0+20230424.git7586a3f7f-1_i386.deb
+ d98406af8c1cb9df93ec38be8d44ebecd91c462c842fa655b67bd43e9284c525 12494 trustedgrub2_1.4.0+20230424.git7586a3f7f-1_i386.buildinfo
+ c31c84bfd9fb0c52b5013cab2b68be8d4f29d26be3fc98ec392b0ac0058d51a4 8235160 trustedgrub2_1.4.0+20230424.git7586a3f7f-1_i386.deb
+Files:
+ 49586609dc4992a78b00cb8d9025ba06 12660104 debug optional trustedgrub2-dbgsym_1.4.0+20230424.git7586a3f7f-1_i386.deb
+ afa2dbae0fbf4d17dde175316df7d681 12494 admin optional trustedgrub2_1.4.0+20230424.git7586a3f7f-1_i386.buildinfo
+ 88b82768e0430dd34c5dc9af23d62c4e 8235160 admin optional trustedgrub2_1.4.0+20230424.git7586a3f7f-1_i386.deb
+
+-----BEGIN PGP SIGNATURE-----
+
+iIYEARYKAC4WIQTWkd0xNWtIORg6n8DjQLK2WJpUpAUCZMn5ihAcZGxpdHpAZGxp
+dHoubmV0AAoJEONAsrZYmlSkL2wA/0KwMXbeEPAg0YjB8y4o65P2gcTvXrTXfcLN
+a/spZDo5AP4jrNGkXW75756JkVU58erdl2WstvWR3e/fmIRyZCJZAg==
+=uOOj
+-----END PGP SIGNATURE-----

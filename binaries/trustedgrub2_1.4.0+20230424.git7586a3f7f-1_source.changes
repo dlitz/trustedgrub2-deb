@@ -1,0 +1,39 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Format: 1.8
+Date: Wed, 02 Aug 2023 00:25:20 -0600
+Source: trustedgrub2
+Architecture: source
+Version: 1.4.0+20230424.git7586a3f7f-1
+Distribution: dlitz-aptly
+Urgency: medium
+Maintainer: Darsey Litzenberger <dlitz@dlitz.net>
+Changed-By: Darsey Litzenberger <dlitz@dlitz.net>
+Changes:
+ trustedgrub2 (1.4.0+20230424.git7586a3f7f-1) dlitz-aptly; urgency=medium
+ .
+   * Initial package release.
+Checksums-Sha1:
+ 38324224cf6122873990ef714641af170b4deb80 2364 trustedgrub2_1.4.0+20230424.git7586a3f7f-1.dsc
+ ac1312019694809d274c93a2da381bc68b797dbe 5675894 trustedgrub2_1.4.0+20230424.git7586a3f7f.orig.tar.gz
+ 6886dbc57738cf7b0ca7fb14b9cc5f5e1c44b2c8 14212 trustedgrub2_1.4.0+20230424.git7586a3f7f-1.debian.tar.xz
+ ca40a289859f378a4e0fdfe8c3d80d8ae9ece0ef 12236 trustedgrub2_1.4.0+20230424.git7586a3f7f-1_source.buildinfo
+Checksums-Sha256:
+ 87e6d4bf7cd0aac033d4a3873c4925c84768bf31553aa893fff3bf5c081ddb1d 2364 trustedgrub2_1.4.0+20230424.git7586a3f7f-1.dsc
+ 536db5a75188de1e99a0488a5e84b264a9b5d95713e96b559d565fc063181841 5675894 trustedgrub2_1.4.0+20230424.git7586a3f7f.orig.tar.gz
+ 4f9f356555be92c62176a5b9c5429379eac979152f451afe679b9bde7ca3d443 14212 trustedgrub2_1.4.0+20230424.git7586a3f7f-1.debian.tar.xz
+ d027a28cd193efffa8bb3af088fb5ff9ed69124dfaa5255859b2c9a2f36831cc 12236 trustedgrub2_1.4.0+20230424.git7586a3f7f-1_source.buildinfo
+Files:
+ 34b2dd98a64b658d0df468af0db7e092 2364 admin optional trustedgrub2_1.4.0+20230424.git7586a3f7f-1.dsc
+ 1787f8fe2e1b62a0bebb70aac411d902 5675894 admin optional trustedgrub2_1.4.0+20230424.git7586a3f7f.orig.tar.gz
+ 5ec6dc1df1487ce2590252951bddcf27 14212 admin optional trustedgrub2_1.4.0+20230424.git7586a3f7f-1.debian.tar.xz
+ 65b692051e52acd6163f4fe18801b9f0 12236 admin optional trustedgrub2_1.4.0+20230424.git7586a3f7f-1_source.buildinfo
+
+-----BEGIN PGP SIGNATURE-----
+
+iIYEARYKAC4WIQTWkd0xNWtIORg6n8DjQLK2WJpUpAUCZMn3eRAcZGxpdHpAZGxp
+dHoubmV0AAoJEONAsrZYmlSkLVgA/3ug6pRr/wXCBgSETURT0zFHtAa30o7uVQOP
+yDtsocdtAP99J9CvllvtV0je/fZgcId982VxZk2PBeHnqhg5O/dBAQ==
+=LyKA
+-----END PGP SIGNATURE-----
